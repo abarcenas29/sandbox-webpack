@@ -1,4 +1,4 @@
-#3 Sandbox Webpack Configuration
+# Sandbox Webpack Configuration
 
 this is the webpack configuration for the `react-sandbox-v2` but it can also be used as webpack config for other projects aswell.
 
