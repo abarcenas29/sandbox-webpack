@@ -11,7 +11,12 @@ module.exports = (env, options) => {
   const srcFolder = process.env.SCR_FOLDER
 
   const config = {
-    entry: process.env.WEBPACK_ENTRY_PATH,
+    entry: path.joins(
+      __dirname,
+      '..',
+      process.env.SCR_FOLDER,
+      process.env.WEBPACK_ENTRY_PATH
+    ),
     target: 'web',
     output: {
       path: path.join(__dirname, '..', process.env.WEBPACK_BUILD_FOLDER),
@@ -51,15 +56,15 @@ module.exports = (env, options) => {
         {
           test: /\.scss$/,
           use: [
-            {loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader},
-            {loader: 'css-loader'},
+            { loader: isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader },
+            { loader: 'css-loader' },
             {
               loader: 'postcss-loader',
               options: {
                 plugins: () => [autoPrefixer]
               }
             },
-            {loader: 'sass-loader'}
+            { loader: 'sass-loader' }
           ]
         },
         {
