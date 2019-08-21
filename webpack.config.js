@@ -11,7 +11,7 @@ module.exports = (env, options) => {
   const srcFolder = process.env.SCR_FOLDER
 
   const config = {
-    entry: path.joins(
+    entry: path.resolve(
       __dirname,
       '..',
       process.env.SCR_FOLDER,
@@ -26,8 +26,8 @@ module.exports = (env, options) => {
     devtool: (isDevMode) ? 'inline-source-map' : false,
     resolve: {
       alias: {
-        'Components': path.resolve(srcFolder, 'components'),
-        'Containers': path.resolve(srcFolder, 'containers')
+        Components: path.resolve(__dirname, '..', srcFolder, 'components'),
+        Containers: path.resolve(__dirname, '..', srcFolder, 'containers')
       }
     },
     plugins: [
@@ -40,9 +40,10 @@ module.exports = (env, options) => {
       })
     ],
     devServer: {
-      publicPath: '/',
+      historyApiFallback: true,
+      host: '0.0.0.0',
       port: 3100,
-      historyApiFallback: true
+      publicPath: '/'
     },
     module: {
       rules: [
