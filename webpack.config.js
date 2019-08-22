@@ -21,7 +21,8 @@ module.exports = (env, options) => {
     output: {
       path: path.join(__dirname, '..', process.env.WEBPACK_BUILD_FOLDER),
       filename: '[name].bundle.js',
-      chunkFilename: 'bundle.[chunkhash].js'
+      chunkFilename: 'bundle.[chunkhash].js',
+      publicPath: /'
     },
     devtool: (isDevMode) ? 'inline-source-map' : false,
     resolve: {
