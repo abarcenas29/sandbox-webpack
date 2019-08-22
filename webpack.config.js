@@ -22,7 +22,7 @@ module.exports = (env, options) => {
       path: path.join(__dirname, '..', process.env.WEBPACK_BUILD_FOLDER),
       filename: '[name].bundle.js',
       chunkFilename: 'bundle.[chunkhash].js',
-      publicPath: /'
+      publicPath: '/'
     },
     devtool: (isDevMode) ? 'inline-source-map' : false,
     resolve: {
