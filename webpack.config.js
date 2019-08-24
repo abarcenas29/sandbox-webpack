@@ -19,7 +19,7 @@ module.exports = (env, options) => {
     ),
     target: 'web',
     output: {
-      path: path.join(__dirname, '..', process.env.WEBPACK_BUILD_FOLDER),
+      path: path.join(__dirname, '..', process.env.WEBPACK_BUILD_PATH),
       filename: '[name].bundle.js',
       chunkFilename: 'bundle.[chunkhash].js',
       publicPath: '/'
@@ -27,8 +27,11 @@ module.exports = (env, options) => {
     devtool: (isDevMode) ? 'inline-source-map' : false,
     resolve: {
       alias: {
+        'react-dom': '@hot-loader/react-dom',
         Components: path.resolve(__dirname, '..', srcFolder, 'components'),
-        Containers: path.resolve(__dirname, '..', srcFolder, 'containers')
+        Containers: path.resolve(__dirname, '..', srcFolder, 'containers'),
+        RootContainers: path.resolve(__dirname, '..', srcFolder, 'rootContainers'),
+        Helpers: path.resolve(__dirname, '..', srcFolder, 'helpers')
       }
     },
     plugins: [
