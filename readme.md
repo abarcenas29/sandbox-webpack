@@ -10,3 +10,11 @@ You need to configure your `.env` file as it pulls the details for the folder st
 * **WEBPACK_BUILD_FOLDER** - the folder name of the folder where the build files to be placed. It is either `static` or `build` and it is placed on the root directory of the project
 * **WEBPACK_ENTRY_PATH** - the path of the file where the webpack will base its build. Normally it is `app.js` or `index.js`
 
+
+## Pre-requisite Plugin
+
+Since I implemented PWA support, projects using this config will need to have these modules installed in their `package.json`
+
+* clean-webpack-plugin
+* copy-webpack-plugin
+* workbox-webpack-plugin

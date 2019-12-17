@@ -4,6 +4,9 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const autoPrefixer = require('autoprefixer')
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (env, options) => {
@@ -35,19 +38,33 @@ module.exports = (env, options) => {
       }
     },
     plugins: [
+      new CleanWebpackPlugin(),
+      new CopyWebpackPlugin([
+        './app/site.webmanifest',
+        './app/manifest.json',
+        {
+          from: './app/assets',
+          to: 'assets'
+        }
+      ]),
       new HtmlWebpackPlugin({
         template: path.resolve(srcFolder, 'index.html')
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',
         chunkFilename: '[id].css'
+      }),
+      new WorkboxWebpackPlugin.InjectManifest({
+        swSrc: './app/sw-src.js',
+        swDest: 'sw.js'
       })
     ],
     devServer: {
       historyApiFallback: true,
       host: '0.0.0.0',
       port: 3100,
-      publicPath: '/'
+      publicPath: '/',
+      writeToDisk: true
     },
     module: {
       rules: [
