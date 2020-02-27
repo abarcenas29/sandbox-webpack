@@ -2,6 +2,7 @@ require('dotenv').config()
 const path = require('path')
 
 const env = process.env.NODE_ENV
+const srcFolder = process.env.SRC_FOLDER
 
 let alias = {
   Components: path.resolve(__dirname, '..', srcFolder, 'components'),
@@ -16,7 +17,6 @@ if (env === 'development') {
     ...alias
   }
 }
-
 
 module.exports = {
   alias

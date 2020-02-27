@@ -4,7 +4,7 @@ const path = require('path')
 
 const plugins = require('./plugins.js')
 const resolve = require('./resolve.js')
-const modules = require('./modules.js')
+const webpackModule = require('./modules.js')
 
 const devServer = {
   historyApiFallback: true,
@@ -15,6 +15,7 @@ const devServer = {
 }
 
 module.exports = (env, options) => {
+  const isDevMode = (process.env.NODE_ENV === 'development')
   const srcFolder = process.env.SRC_FOLDER
   const webpackEntryPath = process.env.WEBPACK_ENTRY_PATH
   const webpackBuildPath = process.env.WEBPACK_BUILD_PATH
@@ -36,11 +37,11 @@ module.exports = (env, options) => {
       chunkFilename: 'bundle.[chunkhash].js',
       publicPath: '/'
     },
-    devtool: (isDevMode) ? 'inline-source-map' : false,
+    devtool: (isDevMode) ? 'inline-source-map' : 'source-map',
     resolve,
     plugins,
     devServer,
-    modules
+    module: webpackModule
   }
 
   return config
